@@ -1,4 +1,6 @@
 /node_modules/
 /public/build/
+/public/index.css
+/yarn-error.log
 
 .DS_Store
