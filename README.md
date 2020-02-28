@@ -1,6 +1,6 @@
 # Tailwind Preprocess for Svelte.js
 
-**PROTOYPE**
+**This is a prototype**
 
 This preprocessor helps organize how you use Tailwind with Svelte.
 
