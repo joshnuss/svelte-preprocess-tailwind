@@ -2,7 +2,7 @@
 
 **This is a prototype**
 
-This preprocessor helps organize how you use Tailwind with Svelte.
+A preprocessor that helps organize Tailwind styling.
 
 # Setup
 
