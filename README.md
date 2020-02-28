@@ -1,93 +1,77 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# Tailwind Preprocess for Svelte.js
 
----
+**PROTOYPE**
 
-# svelte app
+This preprocessor helps organize how you use Tailwind with Svelte.
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+# Setup
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+```javascript
+import preprocessTailwind from 'svelte-preprocess-tailwind'
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
+
+// add as a markup preprocessor in svelte plugin config
+svelte({
+  preprocessor: {
+    markup: preprocessTailwind
+  }
+  ....
+})
 ```
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+# Examples
 
+## Attributes
 
-## Get started
+Instead of using classes, you can use attributes:
 
-Install the dependencies...
+```html
+<a text-bold/>
 
-```bash
-cd svelte-app
-npm install
+<!-- equivalent to: -->
+<a class="text-bold"/>
 ```
 
-...then start [Rollup](https://rollupjs.org):
+## Groups
 
-```bash
-npm run dev
+Multiple classes of the same modifier (`hover`, `focus`) or breakpoint (`sm`, `md`, `lg`, `xl`) can be grouped together using brackets:
+
+```html
+<a hover:(text-bold,underline) md:(text-xl,font-medium)/>
+
+<!-- equivalent to: -->
+<a class="hover:text-bold hover:underline md:text-xl md:font-medium"/>
 ```
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+## Attribute conditions
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
+Conditions can be added to each attribute
 
+```html
+<a text-bold={isActive}/>
 
-## Building and running in production mode
-
-To create an optimised version of the app:
-
-```bash
-npm run build
+<!-- equivalent to: -->
+<a class:text-bold={isActive}/>
 ```
 
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+## Group conditions
 
+Conditions can be added to an entire group
 
-## Single-page app mode
+```html
+<a (text-bold,underline)={isActive}/>
+<a hover:(text-bold,underline)={isActive}/>
+<a md:(text-bold,underline)={isActive}/>
+<a hover:(text-bold,underline) hover:no-underline={isActive}/>
 
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
+<!-- equivalent to: -->
+<a class={isActive ? 'text-bold underline' : ''}/>
+<a class={isActive ? 'hover:text-bold hover:underline' : ''}/>
+<a class={isActive ? 'md:text-bold md:underline' : ''}/>
+<a class="hover:text-bold hover:underline {isActive ? 'hover:no-underline' : ''}"/>
 
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
-
-```js
-"start": "sirv public --single"
 ```
 
+# License
 
-## Deploying to the web
-
-### With [now](https://zeit.co/now)
-
-Install `now` if you haven't already:
-
-```bash
-npm install -g now
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-now deploy --name my-project
-```
-
-As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+MIT
