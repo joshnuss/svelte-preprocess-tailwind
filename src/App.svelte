@@ -2,5 +2,5 @@
   {#if true}Hello <span font-bold>World</span>!{/if}
 </button>
 
-<h1 text-4xl (bg-red-200,font-bold)>Hello World!</h1>
+<h1 text-4xl bg-red-200,font-bold>Hello World!</h1>
 <p font-normal>Bla</p>
