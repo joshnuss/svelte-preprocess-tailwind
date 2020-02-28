@@ -45,7 +45,7 @@ Multiple classes of the same modifier (`hover`, `focus`) or breakpoint (`sm`, `m
 
 ## Attribute conditions
 
-Conditions can be added to each attribute:
+Conditions can be added to any attribute:
 
 ```html
 <a text-bold={isActive}/>
@@ -56,7 +56,7 @@ Conditions can be added to each attribute:
 
 ## Group conditions
 
-Conditions can be added to an entire group:
+Conditions can be added to an entire group of attributes in one shot:
 
 ```html
 <a (text-bold,underline)={isActive}/>
